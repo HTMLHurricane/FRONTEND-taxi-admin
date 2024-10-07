@@ -1,9 +1,12 @@
 import { axiosInstance } from '@/utils/config/axiosInstance'
-import { ILoginCredentials, ILoginResponseData } from './auth.types'
+import { ILoginCredentials, ILoginResponseData } from './types'
 
 export async function login(credentials: ILoginCredentials) {
   try {
-    const res = await axiosInstance.post<ILoginResponseData>('superadmin/auth/', credentials)
+    const res = await axiosInstance.post<ILoginResponseData>(
+      'superadmin/auth/',
+      credentials
+    )
     return res.data
   } catch (error) {
     console.error(error)

@@ -17,9 +17,6 @@ const NotFound = () => {
         subTitle="Извините, страница, которую вы посетили, удалена или не существует."
         extra={
           <Space>
-            <Button href="/login" type="primary">
-              Авторизоваться
-            </Button>
             <Button href="/" type="primary">
               Вернуться на главную
             </Button>
@@ -29,4 +26,4 @@ const NotFound = () => {
     </>
   )
 }
-export { NotFound }
+export default NotFound

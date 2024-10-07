@@ -8,18 +8,16 @@ const App = () => {
 
   if (!isNetwork)
     return (
-      <>
-        <Result
-          status="404"
-          title="No Internet Connection"
-          subTitle="Check your Internet Connection or your network."
-          extra={
-            <Button href="/" type="primary">
-              Try Again
-            </Button>
-          }
-        />
-      </>
+      <Result
+        status="404"
+        title="No Internet Connection"
+        subTitle="Check your Internet Connection or your network."
+        extra={
+          <Button href="/" type="primary">
+            Try Again
+          </Button>
+        }
+      />
     )
   else {
     return <Router />

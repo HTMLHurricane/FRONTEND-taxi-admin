@@ -1,7 +1,7 @@
 import { Form, Input, Button, Layout, Row, Col, Divider } from 'antd'
 import { PhoneOutlined, LockOutlined } from '@ant-design/icons'
 import { MaskedInput } from 'antd-mask-input'
-import { useLoginMutation } from '@/utils/api/auth/auth.api'
+import { useLoginMutation } from '@/utils/api/auth/api'
 
 const { Content, Footer } = Layout
 
@@ -10,7 +10,6 @@ const LoginPage = () => {
   const { mutate: login, isError, error } = useLoginMutation()
   const isLoading = false
   const onFinish = (data: any) => login(data)
-  console.log(error?.message)
 
   return (
     <>
@@ -41,14 +40,19 @@ const LoginPage = () => {
                     rules={[
                       {
                         required: true,
-                        message: 'Please input your phone!',
+                        message: 'Пожалуйста, введите ваш номер!',
                       },
                     ]}
                   >
                     <MaskedInput
                       prefix={<PhoneOutlined className="site-form-item-icon" />}
                       mask={'+998(00)000 00 00'}
-                      onChange={(e) => form.setFieldValue('phone_number', `+998${e.unmaskedValue}`)}
+                      onChange={(e) =>
+                        form.setFieldValue(
+                          'phone_number',
+                          `+998${e.unmaskedValue}`
+                        )
+                      }
                     />
                   </Form.Item>
                   <Form.Item
@@ -56,7 +60,7 @@ const LoginPage = () => {
                     rules={[
                       {
                         required: true,
-                        message: 'Please input your Password!',
+                        message: 'Пожалуйста, введите ваш пароль!',
                       },
                     ]}
                   >
@@ -77,7 +81,7 @@ const LoginPage = () => {
                       Войти
                     </Button>
                   </Form.Item>
-                  {isError && <span className='error'>{error?.message}</span>}
+                  {isError && <span className="error">{error?.message}</span>}
                 </Form>
               </div>
             </Content>
@@ -90,4 +94,4 @@ const LoginPage = () => {
   )
 }
 
-export { LoginPage }
+export default LoginPage
