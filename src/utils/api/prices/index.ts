@@ -19,6 +19,6 @@ export function updatePrice(body: any) {
   return UpdateFunction(`superadmin/ride/price/${body.id}/patch`, body);
 }
 
-export function deletePrice(id: number) {
+export function deletePrice(id: string) {
   return DeleteFunction(`superadmin/ride/price/${id}`);
 }

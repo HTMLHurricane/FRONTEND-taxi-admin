@@ -8,7 +8,6 @@ import Prices from "@/pages/prices";
 import Regions from "@/pages/regions";
 import RegionTranslations from "@/pages/regions/translations";
 import RegionsTypes from "@/pages/regions/types";
-import Routes from "@/pages/routes";
 
 export const privateRoutes = [
   {
@@ -23,7 +22,6 @@ export const privateRoutes = [
     path: "/drivers",
     element: <Drivers />,
   },
-  // машины
   {
     path: "/cars",
     element: <Cars />,
@@ -36,17 +34,14 @@ export const privateRoutes = [
     path: "/cars/types",
     element: <CarTypes />,
   },
-  // маршруты
-  {
-    path: "/routes",
-    element: <Routes />,
-  },
-  // цены
+  // {
+  //   path: "/routes",
+  //   element: <Routes />,
+  // },
   {
     path: "/prices",
     element: <Prices />,
   },
-  // регионы
   {
     path: "/regions",
     element: <Regions />,

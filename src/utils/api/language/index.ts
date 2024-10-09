@@ -18,6 +18,6 @@ export function updateLanguage({ id, ...body }: ILanguage) {
   return UpdateFunction(`superadmin/language/${id}/patch/`, body);
 }
 
-export function deleteLanguage(id: number) {
+export function deleteLanguage(id: string) {
   return DeleteFunction(`superadmin/language/${id}/`);
 }

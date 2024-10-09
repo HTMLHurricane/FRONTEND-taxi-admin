@@ -47,12 +47,12 @@ const Languages: React.FC = () => {
     createLanguageMutation(record);
   };
 
-  const handleEdit = async (id: number | string, record: Omit<ILanguage, "id">) => {
+  const handleEdit = async (id: string, record: Omit<ILanguage, "id">) => {
     updateLanguageMutation({ id: id.toString(), ...record });
   };
 
-  const handleDelete = async (id: number | string) => {
-    deleteLanguageMutation(+id);
+  const handleDelete = async (id: string) => {
+    deleteLanguageMutation(id);
   };
 
   if (!languages?.languages) {

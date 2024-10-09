@@ -51,13 +51,13 @@ const Regions: React.FC = () => {
     createRegionMutation(record);
   };
 
-  const handleEdit = async (id: number | string, record: Omit<IRegion, "id">) => {
+  const handleEdit = async (id: string, record: Omit<IRegion, "id">) => {
     // Здесь должна быть логика редактирования записи в базе данных
     console.log("Редактирование:", id, record);
   };
 
-  const handleDelete = async (id: number | string) => {
-    deleteRegionMutation(+id);
+  const handleDelete = async (id: string) => {
+    deleteRegionMutation(id);
   };
 
   if (!regions?.localities) {

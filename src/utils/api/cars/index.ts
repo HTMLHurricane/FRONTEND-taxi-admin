@@ -1,22 +1,19 @@
-import {
-  CreateFunction,
-  DeleteFunction,
-  ReadFunction,
-  UpdateFunction,
-} from "@/utils/config/crud";
+import { CreateFunction, DeleteFunction, ReadFunction, UpdateFunction } from "@/utils/config/crud";
+import { IVehicle, IVehicleListResponse } from "./types";
 
-export function createCar(body: any) {
+export function createVehicle(body: Omit<IVehicle, "id">) {
   return CreateFunction("superadmin/vehicle/", body);
 }
 
-export function getCars() {
-  return ReadFunction("superadmin/vehicle/list/");
+export function getVehicles() {
+  return ReadFunction<IVehicleListResponse>("superadmin/vehicle/list/");
 }
 
-export function updateCar(body: any) {
-  return UpdateFunction(`superadmin/vehicle/${body.id}/patch`, body);
+export function updateVehicle(body: any) {
+  return UpdateFunction(`superadmin/vehicle/${body.id}/patch/`, body);
 }
 
-export function deleteCar(id: number) {
-  return DeleteFunction(`superadmin/vehicle/${id}`);
+export function deleteVehicle(id: string) {
+  return DeleteFunction(`superadmin/vehicle/${id}/`);
 }
+

@@ -29,12 +29,12 @@ const Prices: React.FC = () => {
     createPriceMutation(record);
   };
 
-  const handleEdit = async (id: number, record: Omit<IRegion, "id">) => {
+  const handleEdit = async (id: string, record: Omit<IRegion, "id">) => {
     // Здесь должна быть логика редактирования записи в базе данных
     console.log("Редактирование:", id, record);
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     // Здесь должна быть логика удаления записи из базы данных
     console.log("Удаление:", id);
   };

@@ -1,12 +1,10 @@
-import { Children, useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import {
   UserOutlined,
-  DashboardOutlined,
   HomeOutlined,
   CarOutlined,
-  BgColorsOutlined,
   BranchesOutlined,
   BankOutlined,
   TranslationOutlined,
@@ -64,14 +62,23 @@ const menutItems = [
     ],
   },
   {
-    key: "/routes",
+    key: "/routes-parent",
     label: "Маршруты",
     icon: <BranchesOutlined />,
-  },
-  {
-    key: "/prices",
-    label: "Цены",
-    icon: <DashboardOutlined />,
+    children: [
+      // {
+      //   key: "/routes",
+      //   label: "Маршруты",
+      // },
+      {
+        key: "/routes/prices",
+        label: "Цены",
+      },
+      {
+        key: "/routes/types",
+        label: "Типы регионов",
+      },
+    ],
   },
   {
     key: "/languages",

@@ -1,18 +1,43 @@
 import CRUDModule from "@/components/modules/CrudModule";
 import PageLoader from "@/components/PageLoader";
+import {
+  useGetVehiclesQuery,
+  useCreateVehicleMutation,
+  useDeleteVehicleMutation,
+  useUpdateVehicleMutation,
+} from "@/utils/api/cars/api";
+import { IVehicle } from "@/utils/api/cars/types";
+import { baseURL } from "@/utils/config/axiosInstance";
+import { Image } from "antd";
 import React from "react";
 
 const Cars: React.FC = () => {
-  const { data: colors } = useGetVehicleColorsQuery();
-  const { mutate: createVehicleColorMutation } = useCreateVehicleColorMutation();
-  const { mutate: deleteVehicleColorMutation } = useDeleteVehicleColorMutation();
-  const { mutate: updateVehicleColorMutation } = useUpdateVehicleColorMutation();
+  const { data: cars } = useGetVehiclesQuery();
+  const { mutate: createVehicleMutation } = useCreateVehicleMutation();
+  const { mutate: deleteVehicleMutation } = useDeleteVehicleMutation();
+  const { mutate: updateVehicleMutation } = useUpdateVehicleMutation();
 
   const columns = [
     {
       title: "Название",
       dataIndex: "name",
       key: "name",
+    },
+    {
+      title: "Количество мест",
+      dataIndex: "quantity",
+      key: "quantity",
+    },
+    {
+      title: "Тип машины",
+      dataIndex: "vehicle_type",
+      key: "vehicle_type",
+    },
+    {
+      title: "Изображение",
+      dataIndex: "image",
+      key: "image",
+      render: (img: string) => <Image src={baseURL.slice(0, -1) + img} width={200} />,
     },
   ];
 
@@ -25,30 +50,30 @@ const Cars: React.FC = () => {
     },
   ];
 
-  const handleAdd = async (record: Omit<IVehicleColor, "id">) => {
-    createVehicleColorMutation(record);
+  const handleAdd = async (record: Omit<IVehicle, "id">) => {
+    createVehicleMutation(record);
   };
 
-  const handleEdit = async (id: string, record: Omit<IVehicleColor, "id">) => {
-    updateVehicleColorMutation({ id, ...record });
+  const handleEdit = async (id: string, record: Omit<IVehicle, "id">) => {
+    updateVehicleMutation({ id, ...record });
   };
 
   const handleDelete = async (id: string) => {
-    deleteVehicleColorMutation(id);
+    deleteVehicleMutation(id);
   };
 
-  if (!colors?.colors) {
+  if (!cars?.vehicles) {
     return <PageLoader />;
   }
   return (
-    <CRUDModule<IVehicleColor>
-      data={colors?.colors}
+    <CRUDModule<IVehicle>
+      data={cars?.vehicles}
       columns={columns}
       onAdd={handleAdd}
       onEdit={handleEdit}
       onDelete={handleDelete}
       formFields={formFields}
-      title='языками'
+      title='машинами'
     />
   );
 };

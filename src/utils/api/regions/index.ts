@@ -19,6 +19,6 @@ export function updateRegion(body: any) {
   return UpdateFunction(`superadmin/locality/${body.id}/patch`, body);
 }
 
-export function deleteRegion(id: number) {
+export function deleteRegion(id: string) {
   return DeleteFunction(`superadmin/locality/${id}/`);
 }

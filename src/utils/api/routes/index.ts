@@ -17,6 +17,6 @@ export function updateDriver(body: any) {
   return UpdateFunction(`superadmin/driver/${body.id}/patch`, body);
 }
 
-export function deleteDriver(id: number) {
+export function deleteDriver(id: string) {
   return DeleteFunction(`superadmin/driver/${id}`);
 }
