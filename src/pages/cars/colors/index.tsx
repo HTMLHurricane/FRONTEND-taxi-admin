@@ -1,8 +1,15 @@
 import CRUDModule from "@/components/modules/CrudModule";
 import PageLoader from "@/components/PageLoader";
+import {
+  useGetVehicleColorsQuery,
+  useCreateVehicleColorMutation,
+  useDeleteVehicleColorMutation,
+  useUpdateVehicleColorMutation,
+} from "@/utils/api/cars/colors/api";
+import { IVehicleColor } from "@/utils/api/cars/colors/types";
 import React from "react";
 
-const Cars: React.FC = () => {
+const Colors: React.FC = () => {
   const { data: colors } = useGetVehicleColorsQuery();
   const { mutate: createVehicleColorMutation } = useCreateVehicleColorMutation();
   const { mutate: deleteVehicleColorMutation } = useDeleteVehicleColorMutation();
@@ -53,4 +60,4 @@ const Cars: React.FC = () => {
   );
 };
 
-export default Cars;
+export default Colors;

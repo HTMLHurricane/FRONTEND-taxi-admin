@@ -1,61 +1,79 @@
-import CRUDModule from '@/components/modules/CrudModule'
-import React from 'react'
-
-interface User {
-  id: number
-  name: string
-  email: string
-  age: number
-}
+import CRUDModule from "@/components/modules/CrudModule";
+import PageLoader from "@/components/PageLoader";
+import { useCreateRegionMutation, useDeleteRegionMutation, useGetRegionsQuery } from "@/utils/api/regions/api";
+import { IRegion } from "@/utils/api/regions/types";
+import { useGetRegionTypesQuery } from "@/utils/api/regions/types/api";
+import React from "react";
 
 const Regions: React.FC = () => {
+  const { data: regions } = useGetRegionsQuery();
+  const { mutate: createRegionMutation } = useCreateRegionMutation();
+  const { mutate: deleteRegionMutation } = useDeleteRegionMutation();
+  const { data: regionTypes } = useGetRegionTypesQuery();
+
   const columns = [
     {
-      title: 'Имя',
-      dataIndex: 'name',
-      key: 'name',
+      title: "Название",
+      dataIndex: "name",
+      key: "name",
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
+      title: "Тип региона",
+      dataIndex: "locality_type",
+      key: "locality_type",
+      render: (loc: string) => regionTypes?.locality_types?.find((el) => el.code === loc)?.name,
+    },
+  ];
+
+  const formFields = [
+    {
+      name: "name",
+      label: "Название",
+      rules: [{ required: true, message: "Пожалуйста, введите название!" }],
+      component: "Input",
     },
     {
-      title: 'Возраст',
-      dataIndex: 'age',
-      key: 'age',
+      name: "locality_type",
+      label: "Тип региона",
+      rules: [{ required: true, message: "Пожалуйста, выберите тип региона!" }],
+      options: regionTypes?.locality_types?.map((lang) => {
+        console.log(lang);
+        return {
+          value: lang.code,
+          label: lang.name,
+        };
+      }),
+      component: "Select",
     },
-  ]
+  ];
 
-  const data: User[] = [
-    { id: 1, name: 'Иван Иванов', email: 'ivan@example.com', age: 30 },
-    { id: 2, name: 'Мария Петрова', email: 'maria@example.com', age: 25 },
-  ]
+  const handleAdd = async (record: Omit<IRegion, "id">) => {
+    createRegionMutation(record);
+  };
 
-  const handleAdd = async (record: User) => {
-    // Здесь должна быть логика добавления записи в базу данных
-    console.log('Добавление:', record)
-  }
-
-  const handleEdit = async (id: number, record: User) => {
+  const handleEdit = async (id: number | string, record: Omit<IRegion, "id">) => {
     // Здесь должна быть логика редактирования записи в базе данных
-    console.log('Редактирование:', id, record)
-  }
+    console.log("Редактирование:", id, record);
+  };
 
-  const handleDelete = async (id: number) => {
-    // Здесь должна быть логика удаления записи из базы данных
-    console.log('Удаление:', id)
-  }
+  const handleDelete = async (id: number | string) => {
+    deleteRegionMutation(+id);
+  };
 
+  if (!regions?.localities) {
+    return <PageLoader />;
+  }
   return (
-    <CRUDModule<User>
-      data={data}
+    <CRUDModule<IRegion>
+      data={regions?.localities}
       columns={columns}
       onAdd={handleAdd}
       onEdit={handleEdit}
+      formFields={formFields}
       onDelete={handleDelete}
+      title='регионами'
     />
-  )
-}
+  );
+};
 
-export default Regions
+export default Regions;

@@ -1,11 +1,23 @@
-import { axiosInstance } from '@/utils/config/axiosInstance'
+import {
+  CreateFunction,
+  ReadFunction,
+  UpdateFunction,
+  DeleteFunction,
+} from "@/utils/config/crud";
+import { ILanguage, ILanguageListResponse } from "./types";
 
-export async function getLanguages() {
-  try {
-    const res = await axiosInstance.get<any>('superadmin/language/list')
-    return res.data
-  } catch (error) {
-    console.error(error)
-    throw new Error('Произошла ошибка при загрузке языков. Попробуйте еще раз')
-  }
+export function createLanguage(body: Omit<ILanguage, "id">) {
+  return CreateFunction("superadmin/language/", body);
+}
+
+export function getLanguages() {
+  return ReadFunction<ILanguageListResponse>("superadmin/language/list/");
+}
+
+export function updateLanguage({ id, ...body }: ILanguage) {
+  return UpdateFunction(`superadmin/language/${id}/patch/`, body);
+}
+
+export function deleteLanguage(id: number) {
+  return DeleteFunction(`superadmin/language/${id}/`);
 }

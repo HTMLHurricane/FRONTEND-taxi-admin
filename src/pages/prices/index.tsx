@@ -1,61 +1,57 @@
-import CRUDModule from '@/components/modules/CrudModule'
-import React from 'react'
-
-interface User {
-  id: number
-  name: string
-  email: string
-  age: number
-}
+import CRUDModule from "@/components/modules/CrudModule";
+import PageLoader from "@/components/PageLoader";
+import {
+  useCreatePriceMutation,
+  useGetPricesQuery,
+} from "@/utils/api/prices/api";
+import { IRegion } from "@/utils/api/regions/types";
+import React from "react";
 
 const Prices: React.FC = () => {
+  const { data: prices } = useGetPricesQuery();
+  const { mutate: createPriceMutation } = useCreatePriceMutation();
+
   const columns = [
     {
-      title: 'Имя',
-      dataIndex: 'name',
-      key: 'name',
+      title: "Название",
+      dataIndex: "name",
+      key: "name",
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
+      title: "Тип языка",
+      dataIndex: "locality_type",
+      key: "locality_type",
     },
-    {
-      title: 'Возраст',
-      dataIndex: 'age',
-      key: 'age',
-    },
-  ]
+  ];
 
-  const data: User[] = [
-    { id: 1, name: 'Иван Иванов', email: 'ivan@example.com', age: 30 },
-    { id: 2, name: 'Мария Петрова', email: 'maria@example.com', age: 25 },
-  ]
+  const handleAdd = async (record: Omit<IRegion, "id">) => {
+    console.log("Добавление:", record);
+    createPriceMutation(record);
+  };
 
-  const handleAdd = async (record: User) => {
-    // Здесь должна быть логика добавления записи в базу данных
-    console.log('Добавление:', record)
-  }
-
-  const handleEdit = async (id: number, record: User) => {
+  const handleEdit = async (id: number, record: Omit<IRegion, "id">) => {
     // Здесь должна быть логика редактирования записи в базе данных
-    console.log('Редактирование:', id, record)
-  }
+    console.log("Редактирование:", id, record);
+  };
 
   const handleDelete = async (id: number) => {
     // Здесь должна быть логика удаления записи из базы данных
-    console.log('Удаление:', id)
-  }
+    console.log("Удаление:", id);
+  };
 
+  if (!prices?.prices) {
+    return <PageLoader />;
+  }
   return (
-    <CRUDModule<User>
-      data={data}
+    <CRUDModule<IRegion>
+      data={prices?.prices}
       columns={columns}
       onAdd={handleAdd}
       onEdit={handleEdit}
       onDelete={handleDelete}
+      title='языками'
     />
-  )
-}
+  );
+};
 
-export default Prices
+export default Prices;
