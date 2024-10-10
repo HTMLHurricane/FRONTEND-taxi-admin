@@ -76,9 +76,9 @@ function CRUDModule<T extends { id: string }>({
       delete values.image;
     }
     if (editingRecord && onEdit) {
-      await onEdit(editingRecord.id, values as T);
+      await onEdit(editingRecord.id, values);
     } else if (onAdd) {
-      await onAdd(values as T);
+      await onAdd(values);
     }
     closeDrawer();
   };

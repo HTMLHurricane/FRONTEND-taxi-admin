@@ -66,17 +66,17 @@ const menutItems = [
     label: "Маршруты",
     icon: <BranchesOutlined />,
     children: [
-      // {
-      //   key: "/routes",
-      //   label: "Маршруты",
-      // },
       {
-        key: "/routes/prices",
-        label: "Цены",
+        key: "/routes/special",
+        label: "Специальные",
+      },
+      {
+        key: "/routes/taxi",
+        label: "Такси",
       },
       {
         key: "/routes/types",
-        label: "Типы регионов",
+        label: "Типы маршрутов",
       },
     ],
   },

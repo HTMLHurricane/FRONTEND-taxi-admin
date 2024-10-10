@@ -4,10 +4,12 @@ import CarTypes from "@/pages/cars/types";
 import Drivers from "@/pages/drivers";
 import Home from "@/pages/home";
 import Languages from "@/pages/language";
-import Prices from "@/pages/prices";
 import Regions from "@/pages/regions";
 import RegionTranslations from "@/pages/regions/translations";
 import RegionsTypes from "@/pages/regions/types";
+import Special from "@/pages/routes/special";
+import Taxi from "@/pages/routes/taxi";
+import RouteTypes from "@/pages/routes/types";
 
 export const privateRoutes = [
   {
@@ -34,13 +36,17 @@ export const privateRoutes = [
     path: "/cars/types",
     element: <CarTypes />,
   },
-  // {
-  //   path: "/routes",
-  //   element: <Routes />,
-  // },
   {
-    path: "/prices",
-    element: <Prices />,
+    path: "/routes/taxi",
+    element: <Taxi />,
+  },
+  {
+    path: "/routes/special",
+    element: <Special />,
+  },
+  {
+    path: "/routes/types",
+    element: <RouteTypes />,
   },
   {
     path: "/regions",
