@@ -1,6 +1,11 @@
 import CRUDModule from "@/components/modules/CrudModule";
 import PageLoader from "@/components/PageLoader";
-import { useCreateRegionMutation, useDeleteRegionMutation, useGetRegionsQuery } from "@/utils/api/regions/api";
+import {
+  useCreateRegionMutation,
+  useDeleteRegionMutation,
+  useGetRegionsQuery,
+  useUpdateRegionMutation,
+} from "@/utils/api/regions/api";
 import { IRegion } from "@/utils/api/regions/types";
 import { useGetRegionTypesQuery } from "@/utils/api/regions/types/api";
 import React from "react";
@@ -9,6 +14,7 @@ const Regions: React.FC = () => {
   const { data: regions } = useGetRegionsQuery();
   const { mutate: createRegionMutation } = useCreateRegionMutation();
   const { mutate: deleteRegionMutation } = useDeleteRegionMutation();
+  const { mutate: updateRegionMutation } = useUpdateRegionMutation();
   const { data: regionTypes } = useGetRegionTypesQuery();
 
   const columns = [
@@ -36,13 +42,10 @@ const Regions: React.FC = () => {
       name: "locality_type",
       label: "Тип региона",
       rules: [{ required: true, message: "Пожалуйста, выберите тип региона!" }],
-      options: regionTypes?.locality_types?.map((lang) => {
-        console.log(lang);
-        return {
-          value: lang.code,
-          label: lang.name,
-        };
-      }),
+      options: regionTypes?.locality_types?.map((lang) => ({
+        value: lang.code,
+        label: lang.name,
+      })),
       component: "Select",
     },
   ];
@@ -52,8 +55,7 @@ const Regions: React.FC = () => {
   };
 
   const handleEdit = async (id: string, record: Omit<IRegion, "id">) => {
-    // Здесь должна быть логика редактирования записи в базе данных
-    console.log("Редактирование:", id, record);
+    updateRegionMutation({ id, ...record });
   };
 
   const handleDelete = async (id: string) => {

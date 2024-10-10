@@ -1,9 +1,4 @@
-import {
-  CreateFunction,
-  DeleteFunction,
-  ReadFunction,
-  UpdateFunction,
-} from "@/utils/config/crud";
+import { CreateFunction, DeleteFunction, ReadFunction, UpdateFunction } from "@/utils/config/crud";
 import { IRegion, IRegionListResponse } from "./types";
 
 export function createRegion(body: Omit<IRegion, "id">) {
@@ -14,9 +9,8 @@ export function getRegions() {
   return ReadFunction<IRegionListResponse>("superadmin/locality/list/");
 }
 
-
-export function updateRegion(body: any) {
-  return UpdateFunction(`superadmin/locality/${body.id}/patch`, body);
+export function updateRegion(body: IRegion) {
+  return UpdateFunction(`superadmin/locality/${body.id}/patch/`, body);
 }
 
 export function deleteRegion(id: string) {

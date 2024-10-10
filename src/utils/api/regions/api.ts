@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { createRegion, deleteRegion, getRegions } from ".";
+import { createRegion, deleteRegion, getRegions, updateRegion } from ".";
 import { message } from "antd";
 import { IRegionList, IRegionListResponse } from "./types";
 
@@ -33,6 +33,20 @@ export const useDeleteRegionMutation = () => {
     },
     onError: () => {
       message.error("Произошла ошибка во время удаления");
+    },
+  });
+};
+
+export const useUpdateRegionMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(updateRegion, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("regions");
+      message.success("Успешно изменено");
+    },
+    onError: () => {
+      message.error("Произошла ошибка во время редактирования");
     },
   });
 };
