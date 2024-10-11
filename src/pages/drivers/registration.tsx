@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Steps, Form, Input, Select, Button } from "antd";
 
 const { Step } = Steps;
