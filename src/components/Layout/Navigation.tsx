@@ -19,9 +19,23 @@ const menutItems = [
     icon: <HomeOutlined />,
   },
   {
-    key: "/drivers",
+    key: "/drivers-parent",
     label: "Водители",
     icon: <UserOutlined />,
+    children: [
+      {
+        key: "/drivers/registration",
+        label: "Регистрация",
+      },
+      {
+        key: "/drivers",
+        label: "Водители",
+      },
+      {
+        key: "/drivers/types",
+        label: "Типы водителей",
+      },
+    ],
   },
   {
     key: "/cars-parent",
