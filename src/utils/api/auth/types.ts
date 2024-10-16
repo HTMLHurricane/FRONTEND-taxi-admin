@@ -19,3 +19,17 @@ export interface Tokens {
   access: string
   refresh: string
 }
+
+export interface IRefreshTokensDataResponse {
+  status:  string;
+  message: string;
+  data:    IRefreshTokensData;
+}
+
+export interface IRefreshTokensData {
+  token: Token;
+}
+
+export interface Token {
+  access: string;
+}

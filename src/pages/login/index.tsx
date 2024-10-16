@@ -13,7 +13,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <Layout className="layout">
+      <Layout className='layout'>
         <Row>
           <Col span={12} offset={6}>
             <Content
@@ -25,18 +25,18 @@ const LoginPage = () => {
             >
               <h1 style={{ textAlign: 'center' }}>Авторизация</h1>
               <Divider />
-              <div className="site-layout-content">
+              <div className='site-layout-content'>
                 <Form
                   form={form}
-                  name="normal_login"
-                  className="login-form"
+                  name='normal_login'
+                  className='login-form'
                   initialValues={{
                     remember: true,
                   }}
                   onFinish={onFinish}
                 >
                   <Form.Item
-                    name="phone_number"
+                    name='phone_number'
                     rules={[
                       {
                         required: true,
@@ -45,7 +45,7 @@ const LoginPage = () => {
                     ]}
                   >
                     <MaskedInput
-                      prefix={<PhoneOutlined className="site-form-item-icon" />}
+                      prefix={<PhoneOutlined className='site-form-item-icon' />}
                       mask={'+998(00)000 00 00'}
                       onChange={(e) =>
                         form.setFieldValue(
@@ -56,7 +56,7 @@ const LoginPage = () => {
                     />
                   </Form.Item>
                   <Form.Item
-                    name="password"
+                    name='password'
                     rules={[
                       {
                         required: true,
@@ -65,23 +65,23 @@ const LoginPage = () => {
                     ]}
                   >
                     <Input
-                      prefix={<LockOutlined className="site-form-item-icon" />}
-                      type="password"
-                      placeholder="*******"
-                      autoComplete="off"
+                      prefix={<LockOutlined className='site-form-item-icon' />}
+                      type='password'
+                      placeholder='*******'
+                      autoComplete='off'
                     />
                   </Form.Item>
                   <Form.Item>
                     <Button
-                      type="primary"
-                      htmlType="submit"
-                      className="login-form-button"
+                      type='primary'
+                      htmlType='submit'
+                      className='login-form-button'
                       loading={isLoading}
                     >
                       Войти
                     </Button>
                   </Form.Item>
-                  {isError && <span className="error">{error?.message}</span>}
+                  {isError && <span className='error'>{error?.message}</span>}
                 </Form>
               </div>
             </Content>

@@ -1,6 +1,8 @@
+import { Tokens } from "@/utils/api/auth/types"
+
 export interface IAuthState {
-  token: string | null
+  tokens: Tokens
   isLoggedIn: boolean
-  login: (newToken: string) => void
+  login: (newToken: Tokens) => void
   logout: () => void
 }

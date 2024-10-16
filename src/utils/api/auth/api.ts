@@ -12,7 +12,7 @@ export const useLoginMutation = () => {
   return useMutation<ILoginResponseData, any, ILoginCredentials>(login, {
     onSuccess: (data) => {
       message.success('Добро пожаловать')
-      loginToState(data.data.tokens.access)
+      loginToState(data.data.tokens)
       navigate('/')
     },
     onError: (error) => {
@@ -20,7 +20,3 @@ export const useLoginMutation = () => {
     },
   })
 }
-
-// export const useCheckUser = () => {
-//   return useQuery<ICheckUserData, any>(['users'], checkUser)
-// }

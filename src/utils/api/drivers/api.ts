@@ -1,6 +1,7 @@
 import { useQuery, useQueryClient, useMutation } from "react-query";
 import { deleteDriver, getDrivers, updateDriver } from ".";
 import { IDriverList, IDriverListResponse } from "./types";
+import { message } from "antd";
 
 export const useGetDriversQuery = () => {
   return useQuery<IDriverListResponse, any, IDriverList>("drivers", getDrivers, {
@@ -15,6 +16,9 @@ export const useUpdateDriverMutation = () => {
     onSuccess: () => {
       queryClient.invalidateQueries("drivers");
     },
+    onError: () => {
+      message.error("Произошла ошибка во время редактирования");
+    },
   });
 };
 
@@ -24,6 +28,9 @@ export const useDeleteDriverMutation = () => {
   return useMutation(deleteDriver, {
     onSuccess: () => {
       queryClient.invalidateQueries("drivers");
+    },
+    onError: () => {
+      message.error("Произошла ошибка во время удаления");
     },
   });
 };

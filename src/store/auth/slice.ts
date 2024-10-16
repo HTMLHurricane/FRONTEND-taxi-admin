@@ -1,19 +1,24 @@
 import { create } from 'zustand'
 import { TOKEN } from '@/utils/config/token'
 import { IAuthState } from './types'
+import { Tokens } from '@/utils/api/auth/types'
 
 const useAuthStore = create<IAuthState>((set) => ({
-  token: TOKEN.get(),
-  isLoggedIn: !!TOKEN.get(),
+  tokens: {
+    access: TOKEN.getAccessToken() || '',
+    refresh: TOKEN.getRefreshToken() || '',
+  },
+  isLoggedIn: !!TOKEN.getAccessToken(),
 
-  login: (newToken: string) => {
-    TOKEN.set(newToken)
-    set({ token: newToken, isLoggedIn: true })
+  login: (newToken: Tokens) => {
+    TOKEN.setAccessToken(newToken.access)
+    TOKEN.setRefreshToken(newToken.refresh)
+    set({ tokens: newToken, isLoggedIn: true })
   },
 
   logout: () => {
-    TOKEN.remove()
-    set({ token: null, isLoggedIn: false })
+    TOKEN.removeAccessToken()
+    set({ tokens: { access: '', refresh: '' }, isLoggedIn: false })
   },
 }))
 

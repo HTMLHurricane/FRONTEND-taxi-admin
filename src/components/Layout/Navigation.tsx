@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Layout, Menu } from "antd";
+import { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { Layout, Menu } from 'antd'
 import {
   UserOutlined,
   HomeOutlined,
@@ -8,105 +8,109 @@ import {
   BranchesOutlined,
   BankOutlined,
   TranslationOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons'
 
-const { Sider } = Layout;
+const { Sider } = Layout
 
 const menutItems = [
   {
-    key: "/",
-    label: "Главная",
+    key: '/',
+    label: 'Главная',
     icon: <HomeOutlined />,
   },
   {
-    key: "/drivers-parent",
-    label: "Водители",
+    key: '/drivers-parent',
+    label: 'Водители',
     icon: <UserOutlined />,
     children: [
       {
-        key: "/drivers/registration",
-        label: "Регистрация",
+        key: '/drivers/registration',
+        label: 'Регистрация',
       },
       {
-        key: "/drivers",
-        label: "Водители",
+        key: '/drivers',
+        label: 'Водители',
       },
       {
-        key: "/drivers/types",
-        label: "Типы водителей",
+        key: '/drivers/types',
+        label: 'Типы водителей',
       },
     ],
   },
   {
-    key: "/cars-parent",
-    label: "Машины",
+    key: '/cars-parent',
+    label: 'Машины',
     icon: <CarOutlined />,
     children: [
       {
-        key: "/cars",
-        label: "Машины",
+        key: '/cars',
+        label: 'Машины',
       },
       {
-        key: "/cars/colors",
-        label: "Цвета машин",
+        key: '/cars/colors/assign',
+        label: 'Цвета машин',
       },
       {
-        key: "/cars/types",
-        label: "Типы машин",
+        key: '/cars/colors',
+        label: 'Цвета',
+      },
+      {
+        key: '/cars/types',
+        label: 'Типы машин',
       },
     ],
   },
   {
-    key: "/regions-parent",
-    label: "Регионы",
+    key: '/regions-parent',
+    label: 'Регионы',
     icon: <BankOutlined />,
     children: [
       {
-        key: "/regions",
-        label: "Регионы",
+        key: '/regions',
+        label: 'Регионы',
       },
       {
-        key: "/regions/translations",
-        label: "Переводы",
+        key: '/regions/translations',
+        label: 'Переводы',
       },
       {
-        key: "/regions/types",
-        label: "Типы регионов",
+        key: '/regions/types',
+        label: 'Типы регионов',
       },
     ],
   },
   {
-    key: "/routes-parent",
-    label: "Маршруты",
+    key: '/routes-parent',
+    label: 'Маршруты',
     icon: <BranchesOutlined />,
     children: [
       {
-        key: "/routes/special",
-        label: "Специальные",
+        key: '/routes/special',
+        label: 'Специальные',
       },
       {
-        key: "/routes/taxi",
-        label: "Такси",
+        key: '/routes/taxi',
+        label: 'Такси',
       },
       {
-        key: "/routes/types",
-        label: "Типы маршрутов",
+        key: '/routes/types',
+        label: 'Типы маршрутов',
       },
     ],
   },
   {
-    key: "/languages",
-    label: "Языки",
+    key: '/languages',
+    label: 'Языки',
     icon: <TranslationOutlined />,
   },
-];
+]
 
 function Navigation() {
-  const [collapsed, setCollapsed] = useState(false);
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
+  const [collapsed, setCollapsed] = useState(false)
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
 
-  const onCollapse = () => setCollapsed(!collapsed);
+  const onCollapse = () => setCollapsed(!collapsed)
 
   return (
     <>
@@ -127,6 +131,6 @@ function Navigation() {
         />
       </Sider>
     </>
-  );
+  )
 }
-export { Navigation };
+export { Navigation }

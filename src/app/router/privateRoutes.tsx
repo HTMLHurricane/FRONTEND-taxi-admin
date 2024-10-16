@@ -1,5 +1,6 @@
 import Cars from "@/pages/cars";
 import Colors from "@/pages/cars/colors";
+import ColorAssign from "@/pages/cars/colors-assign";
 import CarTypes from "@/pages/cars/types";
 import Drivers from "@/pages/drivers";
 import RegistrationForm from "@/pages/drivers/registration";
@@ -41,6 +42,10 @@ export const privateRoutes = [
   {
     path: "/cars/colors",
     element: <Colors />,
+  },
+  {
+    path: "/cars/colors/assign",
+    element: <ColorAssign />,
   },
   {
     path: "/cars/types",

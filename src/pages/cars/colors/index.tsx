@@ -1,51 +1,51 @@
-import CRUDModule from "@/components/modules/CrudModule";
-import PageLoader from "@/components/PageLoader";
+import CRUDModule from '@/components/CrudModule'
+import PageLoader from '@/components/PageLoader'
 import {
   useGetVehicleColorsQuery,
   useCreateVehicleColorMutation,
   useDeleteVehicleColorMutation,
   useUpdateVehicleColorMutation,
-} from "@/utils/api/cars/colors/api";
-import { IVehicleColor } from "@/utils/api/cars/colors/types";
-import React from "react";
+} from '@/utils/api/cars/colors/api'
+import { IVehicleColor } from '@/utils/api/cars/colors/types'
+import React from 'react'
 
 const Colors: React.FC = () => {
-  const { data: colors } = useGetVehicleColorsQuery();
-  const { mutate: createVehicleColorMutation } = useCreateVehicleColorMutation();
-  const { mutate: deleteVehicleColorMutation } = useDeleteVehicleColorMutation();
-  const { mutate: updateVehicleColorMutation } = useUpdateVehicleColorMutation();
+  const { data: colors } = useGetVehicleColorsQuery()
+  const { mutate: createVehicleColorMutation } = useCreateVehicleColorMutation()
+  const { mutate: deleteVehicleColorMutation } = useDeleteVehicleColorMutation()
+  const { mutate: updateVehicleColorMutation } = useUpdateVehicleColorMutation()
 
   const columns = [
     {
-      title: "Название",
-      dataIndex: "name",
-      key: "name",
+      title: 'Название',
+      dataIndex: 'name',
+      key: 'name',
     },
-  ];
+  ]
 
   const formFields = [
     {
-      name: "name",
-      label: "Название",
-      rules: [{ required: true, message: "Пожалуйста, введите название!" }],
-      component: "Input",
+      name: 'name',
+      label: 'Название',
+      rules: [{ required: true, message: 'Пожалуйста, введите название!' }],
+      component: 'Input',
     },
-  ];
+  ]
 
-  const handleAdd = async (record: Omit<IVehicleColor, "id">) => {
-    createVehicleColorMutation(record);
-  };
+  const handleAdd = async (record: Omit<IVehicleColor, 'id'>) => {
+    createVehicleColorMutation(record)
+  }
 
-  const handleEdit = async (id: string, record: Omit<IVehicleColor, "id">) => {
-    updateVehicleColorMutation({ id, ...record });
-  };
+  const handleEdit = async (id: string, record: Omit<IVehicleColor, 'id'>) => {
+    updateVehicleColorMutation({ id, ...record })
+  }
 
   const handleDelete = async (id: string) => {
-    deleteVehicleColorMutation(id);
-  };
+    deleteVehicleColorMutation(id)
+  }
 
   if (!colors?.colors) {
-    return <PageLoader />;
+    return <PageLoader />
   }
   return (
     <CRUDModule<IVehicleColor>
@@ -57,7 +57,7 @@ const Colors: React.FC = () => {
       formFields={formFields}
       title='языками'
     />
-  );
-};
+  )
+}
 
-export default Colors;
+export default Colors

@@ -5,15 +5,42 @@ export interface IDriverListResponse {
 }
 
 export interface IDriverList {
-  driver_vehicles: IDriver[];
+  drivers: IDriver[];
 }
 
 export interface IDriver {
-  user:           IUser;
-  vehicle:        IDriverVehicle;
-  color:          IColor;
-  vehicle_number: string;
-  id:             string;  // fake. if we remove this field, crud module will ask for id
+  id:               string;
+  user:             User;
+  vehicle:          Vehicle;
+  color:            IColor;
+  vehicle_number:   string;
+  owner:            string;
+  owner_address:    string;
+  issue_date:       Date;
+  manufacture_year: string;
+  front_image_tp:   string;
+  back_image_tp:    string;
+}
+
+
+export interface User {
+  id:           string;
+  phone_number: string;
+  profile:      Profile;
+}
+
+export interface Profile {
+  id:        string;
+  full_name: string;
+  picture:   string;
+}
+
+export interface Vehicle {
+  id:           string;
+  name:         string;
+  quantity:     number;
+  image:        string;
+  vehicle_type: string;
 }
 
 export interface IColor {

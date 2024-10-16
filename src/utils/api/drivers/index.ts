@@ -2,13 +2,13 @@ import { DeleteFunction, ReadFunction, UpdateFunction } from "@/utils/config/cru
 import { IDriverListResponse } from "./types";
 
 export function getDrivers() {
-  return ReadFunction<IDriverListResponse>("superadmin/driver/vehicle/list/");
+  return ReadFunction<IDriverListResponse>("superadmin/driver/list/");
 }
 
 export function updateDriver(body: any) {
-  return UpdateFunction(`superadmin/driver/vehicle/${body.id}/patch/`, body);
+  return UpdateFunction(`superadmin/driver/${body.id}/patch/`, body);
 }
 
 export function deleteDriver(id: string) {
-  return DeleteFunction(`superadmin/driver/vehicle/${id}`);
+  return DeleteFunction(`superadmin/driver/${id}/`);
 }
