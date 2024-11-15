@@ -12,7 +12,7 @@ import {
 import { useGetDriverTypesQuery } from '@/utils/api/drivers/types/api'
 import { useGetVehiclesQuery } from '@/utils/api/cars/api'
 import { useGetVehicleColorsQuery } from '@/utils/api/cars/colors/api'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import VerificationForm from './verification'
 import dayjs from 'dayjs'
 import { useCreateDriverMutation } from '@/utils/api/drivers/registration/api'
@@ -20,41 +20,43 @@ import { UploadOutlined } from '@ant-design/icons'
 import { ICreateAccountBody } from '@/utils/api/drivers/registration/types'
 const { Option } = Select
 
-const formItemLayout = {
-  labelCol: { span: 24 },
-  wrapperCol: { span: 24 },
-}
-
 export default function RegistrationForm() {
   const [form] = Form.useForm()
+  const [selectedDriverType, setSelectedDriverType] = useState<string>('')
   const { data: driverTypes } = useGetDriverTypesQuery()
   const { data: cars } = useGetVehiclesQuery()
   const { data: carColors } = useGetVehicleColorsQuery()
   const { mutate: createDriver } = useCreateDriverMutation()
   const [isVerification, setIsVerification] = useState(false)
   const [phoneNumber, setPhoneNumber] = useState('')
+  const filteredCars = cars?.vehicles?.filter(
+    (car) => !selectedDriverType || car.vehicle_type === selectedDriverType
+  )
 
   const onFinish = (values: ICreateAccountBody) => {
     const formData = new FormData()
-    formData.append('phone_number', values.phone_number)
-    formData.append('driver_type', values.driver_type)
-    formData.append('full_name', values.full_name)
-    formData.append('vehicle_id', values.vehicle_id)
-    formData.append('color_id', values.color_id)
-    formData.append('vehicle_number', values.vehicle_number)
-    formData.append('owner', values.owner)
-    formData.append('owner_address', values.owner_address)
-    formData.append('issue_date', dayjs(values.issue_date).format('YYYY-MM-DD'))
-    formData.append('manufacture_year', values.manufacture_year)
-    formData.append('front_image_tp', values.front_image_tp.file)
-    formData.append('back_image_tp', values.back_image_tp.file)
+    if (values.phone_number) formData.append('phone_number', values.phone_number)
+    if (values.driver_type) formData.append('driver_type', values.driver_type)
+    if (values.full_name) formData.append('full_name', values.full_name)
+    if (values.vehicle_id) formData.append('vehicle_id', values.vehicle_id)
+    if (values.color_id) formData.append('color_id', values.color_id)
+    if (values.vehicle_number) formData.append('vehicle_number', values.vehicle_number)
+    if (values.owner) formData.append('owner', values.owner)
+    if (values.owner_address) formData.append('owner_address', values.owner_address)
+    if (values.issue_date) formData.append('issue_date', dayjs(values.issue_date).format('YYYY-MM-DD'))
+    if (values.manufacture_year) formData.append('manufacture_year', values.manufacture_year)
+    if (values.front_image_tp) formData.append('front_image_tp', values.front_image_tp.file)
+    if (values.back_image_tp) formData.append('back_image_tp', values.back_image_tp.file)
     createDriver(formData)
-
-    console.log(values)
 
     setPhoneNumber(values.phone_number)
     setIsVerification(true)
   }
+
+  useEffect(() => {
+    // Сброс выбранной машины и цвета при изменении типа водителя
+    form.setFieldsValue({ vehicle_id: undefined, color_id: undefined })
+  }, [selectedDriverType, form])
 
   if (isVerification) {
     return <VerificationForm phoneNumber={phoneNumber} />
@@ -64,7 +66,8 @@ export default function RegistrationForm() {
       <h1>Регистрация водителя</h1>
       <Form
         form={form}
-        {...formItemLayout}
+        labelCol={{ span: 24 }}
+        wrapperCol={{ span: 24 }}
         onFinish={onFinish}
         style={{ maxWidth: '800px' }}
       >
@@ -95,7 +98,7 @@ export default function RegistrationForm() {
                 },
               ]}
             >
-              <Select>
+              <Select onChange={(value) => setSelectedDriverType(value)}>
                 {driverTypes?.driver_types?.map((type) => (
                   <Option key={type.code} value={type.code}>
                     {type.name}
@@ -126,8 +129,8 @@ export default function RegistrationForm() {
                 { required: true, message: 'Пожалуйста, выберите машину' },
               ]}
             >
-              <Select>
-                {cars?.vehicles?.map((car) => (
+              <Select disabled={!selectedDriverType}>
+                {filteredCars?.map((car) => (
                   <Option key={car.id} value={car.id}>
                     {car.name}
                   </Option>
@@ -140,7 +143,7 @@ export default function RegistrationForm() {
               name='color_id'
               label='Цвет машины (по умолчанию белый цвет)'
             >
-              <Select>
+              <Select disabled={!selectedDriverType}>
                 {carColors?.colors?.map((color) => (
                   <Option key={color.id} value={color.id}>
                     {color.name}

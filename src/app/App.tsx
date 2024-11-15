@@ -1,10 +1,10 @@
-import { Button, Result } from "antd";
-import useNetwork from "@/hooks/useNetwork";
-import { Router } from "@/app/router";
-import "./style/app.css";
+import { Button, Result } from 'antd'
+import useNetwork from '@/hooks/useNetwork'
+import { Router } from '@/app/router'
+import './style/app.css'
 
 const App = () => {
-  const { isOnline: isNetwork } = useNetwork();
+  const { isOnline: isNetwork } = useNetwork()
 
   if (!isNetwork)
     return (
@@ -18,10 +18,10 @@ const App = () => {
           </Button>
         }
       />
-    );
+    )
   else {
-    return <Router />;
+    return <Router />
   }
-};
+}
 
-export { App };
+export { App }
