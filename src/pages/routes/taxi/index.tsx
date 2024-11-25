@@ -36,13 +36,20 @@ const Taxi: React.FC = () => {
       dataIndex: 'unit_price',
       key: 'unit_price',
     },
+    {
+      title: 'Длительность',
+      dataIndex: 'duration',
+      key: 'duration',
+    },
   ]
 
   const formFields = [
     {
       name: 'from_locality_id',
       label: 'Откуда',
-      rules: [{ required: true, message: 'Пожалуйста, выберите стартовый регион!' }],
+      rules: [
+        { required: true, message: 'Пожалуйста, выберите стартовый регион!' },
+      ],
       options: regions?.localities?.map((region) => ({
         value: region.id,
         label: region.name,
@@ -52,7 +59,9 @@ const Taxi: React.FC = () => {
     {
       name: 'to_locality_id',
       label: 'Куда',
-      rules: [{ required: true, message: 'Пожалуйста, выберите конечный регион!' }],
+      rules: [
+        { required: true, message: 'Пожалуйста, выберите конечный регион!' },
+      ],
       options: regions?.localities?.map((region) => ({
         value: region.id,
         label: region.name,
@@ -62,7 +71,18 @@ const Taxi: React.FC = () => {
     {
       name: 'unit_price',
       label: 'Стоимость за 1 место',
-      rules: [{ required: true, message: 'Пожалуйста, введите стоимость за 1 место!' }],
+      rules: [
+        {
+          required: true,
+          message: 'Пожалуйста, введите стоимость за 1 место!',
+        },
+      ],
+      component: 'Input',
+    },
+    {
+      name: 'duration',
+      label: 'Время в пути (ЧЧ:ММ:СС)',
+      rules: [{ required: true, message: 'Пожалуйста, введите время в пути!' }],
       component: 'Input',
     },
   ]
@@ -72,6 +92,7 @@ const Taxi: React.FC = () => {
       from_locality_id: record.from_locality_id,
       to_locality_id: record.to_locality_id,
       unit_price: record.unit_price,
+      duration: record.duration,
     })
   }
 
