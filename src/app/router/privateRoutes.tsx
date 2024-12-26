@@ -2,6 +2,7 @@ import Cars from "@/pages/cars";
 import Colors from "@/pages/cars/colors";
 import ColorAssign from "@/pages/cars/colors-assign";
 import CarTypes from "@/pages/cars/types";
+import { Clients } from "@/pages/clients";
 import Drivers from "@/pages/drivers";
 import RegistrationForm from "@/pages/drivers/registration";
 import DriversTypes from "@/pages/drivers/types";
@@ -18,6 +19,10 @@ export const privateRoutes = [
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/clients",
+    element: <Clients />,
   },
   {
     path: "/languages",

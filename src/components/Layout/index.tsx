@@ -6,6 +6,7 @@ import { Content } from "antd/es/layout/layout";
 
 const breadcrumbItems = [
   { label: "Главная", path: "/" },
+  { label: "Клиенты", path: "/clients" },
   { label: "Машины", path: "/cars" },
   { label: "Цвета", path: "/colors" },
   { label: "Водители", path: "/drivers" },
