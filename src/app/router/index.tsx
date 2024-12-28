@@ -1,24 +1,23 @@
-import { Route, Routes } from 'react-router-dom'
-import ProtectedRoute from './ProtectedRoute'
-import LoginPage from '@/pages/login'
-import NotFound from '@/pages/not-found'
-import PageLoader from '@/components/PageLoader'
-import { AnimatePresence } from 'framer-motion'
-import { Suspense } from 'react'
-import { privateRoutes } from './privateRoutes'
-import MainLayout from '@/components/Layout'
-import useAuthStore from '@/store/auth/slice'
+import { Route, Routes } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
+import LoginPage from "@/pages/login";
+import NotFound from "@/pages/not-found";
+import PageLoader from "@/components/PageLoader";
+import { AnimatePresence } from "framer-motion";
+import { Suspense } from "react";
+import { privateRoutes } from "./privateRoutes";
+import MainLayout from "@/components/Layout";
+import useAuthStore from "@/store/auth/slice";
 
 const Router: React.FC = () => {
-  const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
-
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   return (
     <Suspense fallback={<PageLoader />}>
-      <AnimatePresence mode='wait' initial={false}>
+      <AnimatePresence mode="wait" initial={false}>
         <Routes>
-          <Route path='/login' element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
           {isLoggedIn && (
-            <Route path='/' element={<MainLayout />}>
+            <Route path="/" element={<MainLayout />}>
               {privateRoutes.map((route) => (
                 <Route
                   key={route.path}
@@ -28,11 +27,11 @@ const Router: React.FC = () => {
               ))}
             </Route>
           )}
-          <Route path='*' element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
     </Suspense>
-  )
-}
+  );
+};
 
-export { Router }
+export { Router };

@@ -22,7 +22,6 @@ axiosInstance.interceptors.response.use(
     if (error.response?.status === 401) {
       originalRequest._retry = true;
       try {
-        // Создаем новый экземпляр axios без интерцепторов для запроса обновления токена
         const refreshAxios = axios.create({ baseURL });
         const newToken = await refreshAxios.post<any>(
           "user/auth/token/refresh/",
@@ -40,6 +39,5 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(refreshError);
       }
     }
-    // return Promise.reject(error)
   }
 );
