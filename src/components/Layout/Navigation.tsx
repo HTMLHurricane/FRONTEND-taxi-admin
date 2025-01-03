@@ -10,6 +10,7 @@ import {
   TranslationOutlined,
 } from "@ant-design/icons";
 import { TbUsersGroup } from "react-icons/tb";
+import { MdCancelPresentation } from "react-icons/md";
 
 const { Sider } = Layout;
 
@@ -101,6 +102,21 @@ const menutItems = [
       {
         key: "/routes/types",
         label: "Типы маршрутов",
+      },
+    ],
+  },
+  {
+    key: "/reason-parsent",
+    label: "Отказы",
+    icon: <MdCancelPresentation />,
+    children: [
+      {
+        key: "/reason",
+        label: "Причины отказа",
+      },
+      {
+        key: "/reason/translations",
+        label: "Переводы",
       },
     ],
   },

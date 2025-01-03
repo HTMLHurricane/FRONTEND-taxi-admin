@@ -14,6 +14,7 @@ const breadcrumbItems = [
   { label: "Цены", path: "/prices" },
   { label: "Регионы", path: "/regions" },
   { label: "Маршруты", path: "/routes" },
+  { label: "Отказы", path: "/reason" },
 ];
 
 const MainLayout = () => {

@@ -8,6 +8,8 @@ import RegistrationForm from "@/pages/drivers/registration";
 import DriversTypes from "@/pages/drivers/types";
 import Home from "@/pages/home";
 import Languages from "@/pages/language";
+import { Reason } from "@/pages/reason";
+import { ReasonTranslations } from "@/pages/reason/translations";
 import Regions from "@/pages/regions";
 import RegionTranslations from "@/pages/regions/translations";
 import RegionsTypes from "@/pages/regions/types";
@@ -79,5 +81,10 @@ export const privateRoutes = [
   {
     path: "/regions/types",
     element: <RegionsTypes />,
+  },
+  { path: "/reason", element: <Reason /> },
+  {
+    path: "/reason/translations",
+    element: <ReasonTranslations />,
   },
 ];
